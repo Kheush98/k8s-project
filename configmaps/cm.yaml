@@ -4,5 +4,5 @@ metadata:
   name: gti-cm
 data:
   spring_profiles_active: prod
-  spring_datasource_url: jdbc:postgresql://db:80/geo_db
+  spring_datasource_url: jdbc:postgresql://db:5432/geo_db
   postgres_db: geo_db
