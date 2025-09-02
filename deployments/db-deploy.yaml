@@ -34,13 +34,19 @@ spec:
               name: gti-cm
               key: postgres_db
         volumeMounts:
-        - name: test-data
+        - name: postgresql-data
           mountPath: /var/lib/postgresql/data
+       
+      initContainers:
+      - name: busybox
+        image: busybox:latest
+        args: ["rm", "-rf", "/var/lib/postgresql/data/lost+found"]
+        volumeMounts: 
+        - name: postgresql-data
+          mountPath: /var/lib/postgresql/data
+      
       volumes: 
-      # - name: postgresql-data
-      #   persistentVolumeClaim:
-      #     claimName: postgresql-pvc
-      - name: test-data
-        hostPath:
-          path: /d/DevOps/kubernetes/gti-project/volumes # directory location on host
-          type: DirectoryOrCreate
+      - name: postgresql-data
+        persistentVolumeClaim:
+          claimName: postgresql-pvc 
+      
