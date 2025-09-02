@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  labels:
+    app.kubernetes.io/name: ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.kheush.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: web
+            port: 
+              number: 80
+  - host: admin.kheush.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: pgadmin
+            port:
+              number: 80
+  - host: geoserver.kheush.xyz
+    http:
+      paths:          
+      - pathType: Prefix
+        path: /geoserver
+        backend:
+          service:
+            name: geo
+            port:
+              number: 80

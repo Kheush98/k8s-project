@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geo
+spec:
+  selector:
+    matchLabels:
+      app: geo
+  template:
+    metadata:
+      labels:
+        app: geo
+    spec:
+      containers:
+      - name: geo
+        image: kartoza/geoserver
+        ports:
+        - containerPort: 8080
+        env:
+          - name: GEOSERVER_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: gti-secret
+                key: geoserver_admin_user
+          - name: GEOSERVER_ADMIN_USER
+            valueFrom:
+              secretKeyRef:
+                name: gti-secret
+                key: geoserver_admin_password
+        volumeMounts:
+          - name: geo-data
+            mountPath: /opt/geoserver/data_dir
+      volumes: 
+      - name: geo-data
+        hostPath:
+          path: /d/DevOps/kubernetes/gti-project/volumes/geo
+          type: DirectoryOrCreate
+      

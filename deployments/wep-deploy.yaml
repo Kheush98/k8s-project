@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      imagePullSecrets:
+      - name: ecr-secret
+      containers:
+      - name: web
+        image: 737960873774.dkr.ecr.us-east-1.amazonaws.com/gti-web:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: VITE_BACKEND
+          value: http://app
+        - name: VITE_GEOSERVER
+          value: http://geo

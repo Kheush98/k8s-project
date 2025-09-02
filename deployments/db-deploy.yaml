@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgis/postgis:16-3.5-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: gti-secret
+              key: postgres_password
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: gti-secret
+              key: postgres_user
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: gti-cm
+              key: postgres_db
+        volumeMounts:
+        - name: test-data
+          mountPath: /var/lib/postgresql/data
+      volumes: 
+      # - name: postgresql-data
+      #   persistentVolumeClaim:
+      #     claimName: postgresql-pvc
+      - name: test-data
+        hostPath:
+          path: /d/DevOps/kubernetes/gti-project/volumes # directory location on host
+          type: DirectoryOrCreate
