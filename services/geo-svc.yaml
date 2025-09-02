@@ -8,3 +8,5 @@ spec:
   ports:
   - port: 80
     targetPort: geo-port
+    protocol: TCP
+  type: ClusterIP

@@ -6,6 +6,7 @@ spec:
   selector:
     app: web
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: web-port
+  - port: 80
+    targetPort: web-port
+    protocol: TCP
+  type: ClusterIP
