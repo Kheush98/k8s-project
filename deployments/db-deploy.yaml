@@ -16,6 +16,7 @@ spec:
       - name: db
         image: postgis/postgis:16-3.5-alpine
         ports:
+        - name: db-port
         - containerPort: 5432
         env:
         - name: POSTGRES_PASSWORD

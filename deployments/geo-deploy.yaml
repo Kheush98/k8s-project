@@ -15,21 +15,22 @@ spec:
       - name: geo
         image: kartoza/geoserver
         ports:
+        - name: geo-port
         - containerPort: 8080
         env:
-          - name: GEOSERVER_ADMIN_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: gti-secret
-                key: geoserver_admin_user
-          - name: GEOSERVER_ADMIN_USER
-            valueFrom:
-              secretKeyRef:
-                name: gti-secret
-                key: geoserver_admin_password
+        - name: GEOSERVER_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: gti-secret
+              key: geoserver_admin_user
+        - name: GEOSERVER_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: gti-secret
+              key: geoserver_admin_password
         volumeMounts:
-          - name: geo-data
-            mountPath: /opt/geoserver/data_dir
+        - name: geo-data
+          mountPath: /opt/geoserver/data_dir
       volumes: 
       - name: geo-data
         hostPath:
