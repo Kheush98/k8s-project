@@ -16,7 +16,7 @@ spec:
         image: kartoza/geoserver
         ports:
         - name: geo-port
-        - containerPort: 8080
+          containerPort: 8080
         env:
         - name: GEOSERVER_ADMIN_PASSWORD
           valueFrom:

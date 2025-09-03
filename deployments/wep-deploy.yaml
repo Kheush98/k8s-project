@@ -21,7 +21,7 @@ spec:
         image: 737960873774.dkr.ecr.us-east-1.amazonaws.com/gti-web:latest
         ports:
         - name: web-port
-        - containerPort: 80
+          containerPort: 80
         env:
         - name: VITE_BACKEND
           value: http://app

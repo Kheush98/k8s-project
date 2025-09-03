@@ -17,7 +17,7 @@ spec:
         image: dpage/pgadmin4
         ports:
         - name: pgadmin-port
-        - containerPort: 80
+          containerPort: 80
         env:
         - name: PGADMIN_DEFAULT_EMAIL
           valueFrom:

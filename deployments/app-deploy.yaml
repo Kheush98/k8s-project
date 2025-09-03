@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - name: app-port
-        - containerPort: 8081
+          containerPort: 8081
         env:
         - name: SPRING_PROFILES_ACTIVE
           valueFrom:
