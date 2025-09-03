@@ -5,7 +5,7 @@ metadata:
   labels:
     app: gti
 spec:
-  storageClassName: default
+  storageClassName: gp2-wffc
   resources:
     requests:
       storage: 3Gi
