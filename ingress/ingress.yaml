@@ -17,7 +17,7 @@ spec:
             name: web
             port: 
               number: 80
-  - host: admin.kheush.xyz
+  - host: pgadmin.kheush.xyz
     http:
       paths:
       - pathType: Prefix
