@@ -19,6 +19,7 @@ spec:
       containers:
       - name: app
         image: 737960873774.dkr.ecr.us-east-1.amazonaws.com/gti-app:latest
+        imagePullPolicy: Always
         ports:
         - name: app-port
         - containerPort: 8081
@@ -43,3 +44,8 @@ spec:
             secretKeyRef:
               name: gti-secret
               key: postgres_password
+              
+      initContainers:
+      - name: wait-for-db
+        image: busybox:latest
+        command: ['sh', '-c', "until nslookup db.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for db-service; sleep 2; done"]
