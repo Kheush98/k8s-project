@@ -28,11 +28,11 @@ spec:
             secretKeyRef:
               name: gti-secret
               key: geoserver_admin_password
-      #   volumeMounts:
-      #   - name: geo-data
-      #     mountPath: /opt/geoserver/data_dir
-      # volumes: 
-      # - name: geo-data
-      #   persistentVolumeClaim:
-      #     claimName: geo-pvc
+        volumeMounts:
+        - name: geo-data
+          mountPath: /opt/geoserver/data_dir
+      volumes: 
+      - name: geo-data
+        persistentVolumeClaim:
+          claimName: geo-pvc
       
